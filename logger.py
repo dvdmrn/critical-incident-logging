@@ -14,7 +14,7 @@ h = str(time.localtime().tm_hour)
 m = str(time.localtime().tm_min)
 s = str(time.localtime().tm_sec)
 
-helpScreen = "\n[commands]===========\n    + /exit := exits writes the csv and exits the app\n    + /reset := resets all data"
+helpScreen = "\n[commands]===========\n    + /exit := exits writes the csv and exits the app\n    + /reset := resets all data\nquestions/comments: dgm.marino (at) gmail.com"
 commands = ["/exit","/reset","/help"]
 
 print("logging initiated at: ",str(h)+":"+str(m)+"."+str(s))
