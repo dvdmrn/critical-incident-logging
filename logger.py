@@ -3,7 +3,7 @@ import time
 import os
 import pprint
 import csv
-
+import platform
 
 
 CIs = [] # {"timestamp:":int, "participant_name":"asdf", "CI":"incident descriptor"}
@@ -20,7 +20,7 @@ commands = ["/exit","/reset","/help"]
 print("logging initiated at: ",str(h)+":"+str(m)+"."+str(s))
 pName = raw_input("enter participant name: ")
 
-os.system('cls')
+
 startTime = time.time()
 
 fileName = y+mo+d+"_"+h+m+"h"+"_"+pName
@@ -37,14 +37,14 @@ def main():
 	global CIs
 	global fileName
 	while True:
-		os.system('cls')
+		clearScrn()
 		# pprint.pprint(CIs)
 		if (len(CIs)>0): print("\nLAST INCIDENT:",CIs[len(CIs)-1])
 		CI = raw_input("critical incident: ")
 		delta = time.time()-startTime
 
 		if CI == commands[0]: # exit
-			os.system('cls')
+			clearScrn()
 			print("writing csv data to: ",fileName+".csv")
 			writeCSV(CIs,fileName)
 			print("writing successful! Have a good day ;-)")
@@ -52,7 +52,7 @@ def main():
 			raw_input()
 			exit()	
 		elif CI == commands[1]: # reset
-			os.system('cls')
+			clearScrn()
 			print('reset data, are you sure? [Y/n]')
 			response = raw_input()
 			if (response == "Y") or (response == "y") or (response == "yes"):
@@ -61,11 +61,18 @@ def main():
 				raw_input()
 			
 		elif CI == commands[2]: # help
-			os.system('cls')
+			clearScrn()
 			print(helpScreen)
 			CI = raw_input("critical incident: ")
 		else:
 			CIs.append({"timestamp":delta,"CI":CI})
 
+def clearScrn():
+	if platform.system() == "Windows":
+		os.system('cls')
+	else:
+		os.system('clear')
 
+
+clearScrn()
 main()
